@@ -4,15 +4,18 @@ require('./src/controllers/userscontrollers.php');
 require('./src/controllers/homepagecontrollers.php');
 
 // Exemple de routage manuel
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'homepage'; // Par défaut : homepage
-$action = isset($_GET['action']) ? $_GET['action'] : 'homepage'; // Par défaut : homepage
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'news'; // Par défaut : homepage
+$action = isset($_GET['action']) ? $_GET['action'] : 'news'; // Par défaut : homepage
 
 $controller = null;
 if ($controllerName === 'login') {
     $controller = new userscontrollers();
 } elseif ($controllerName === 'homepage') {
     $controller = new homepageControllers();
-} else {
+} elseif ($controllerName === 'news') {
+    $controller = new newsControllers();
+}
+else {
     echo "controller non trouvés";
     exit;
 }
