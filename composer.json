@@ -1,6 +1,7 @@
 {
     "name": "joan/blogs",
     "license": "MIT",
+    "description": "A simple blog package",
     "autoload": {
         "psr-4": {
             "Joan\\Blogs\\": "src/"
