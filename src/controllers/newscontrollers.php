@@ -1,10 +1,21 @@
 <?php
-// homepageControllers.php
+
+require ('./src/models/data.php');
+
 class newsControllers
 {
-    public function news()
+    private $data;
+
+
+
+    public function __construct()
     {
-        // Affiche la page des actualités
+        $this->data = new data();
+    }
+
+    public function getArticles()
+    {
+        $datas = $this->data->getArticles(10);
         require('./src/templates/news.php');
     }
 }

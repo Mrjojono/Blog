@@ -1,10 +1,25 @@
-<?php ob_start(); ?>
+<?php ob_start(); 
+?>
 
 
 <main class="pt-24"> 
     <div class="text-center mb-8 justify-center flex flex-wrap items-center m-auto w-[900px]">
+
+    <?php 
+    session_start();
+    if(isset($_SESSION['user'])){
+        echo '<h1 class="text-4xl font-bold mb-2">Bienvenue '.$_SESSION['user']['NOM'].'</h1>';}
+        else{
+         
+            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue sur notre blog</h1>';
+        }
+    ?>
         <!--un nom convenable pour le blog devra etre choisie-->
-        <p class="mt-5 font-bold ">Theblog</p>
+        <p class="mt-5 font-bold text-wrap "> sur Theblog </p><br/>
+     
+       <!-- <button class="bg-red-400  hover:bg-red-700 w-36 p-2 text-white rounded-2xl cursor-pointer" > <a href="index.php?controller=user&action=login">Se connecter</a></button> -->
+
+
         <p class="text-lg text-gray-700 leading-relaxed mt-2.5">
       Ce blog est un espace de partage et d'inspiration où nous mettons en avant des histoires puissantes de femmes et d'individus engagés dans des combats de justice sociale et d'égalité. Ici, nous croyons que chaque voix compte et que l'écriture est un outil de transformation. Rejoignez-nous pour lire, partager et être inspirés.
     </p>
@@ -43,5 +58,7 @@
     </div>
 </main>
 
-<?php $content = ob_get_clean(); ?>
-<?php require('layout.php'); ?>
+<?php $content = ob_get_clean();
+ ?>
+<?php require('layout.php'); 
+?>

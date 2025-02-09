@@ -1,0 +1,18 @@
+{
+    "name": "joan/blogs",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Joan\\Blogs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "joan"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "jcobhams/newsapi": "^1.0"
+    }
+}
