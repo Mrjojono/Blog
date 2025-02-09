@@ -1,6 +1,14 @@
 <?php
-try {
-    $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
-} catch (Exception $e) {
-    die("error" . $e->getMessage());
+
+if (!function_exists('Config')) {
+    function Config()
+    {
+        global $bdd;
+        try {
+            $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', '');
+            return $bdd;
+        } catch (Exception $e) {
+            die("Erreur : " . $e->getMessage());
+        }
+    }
 }

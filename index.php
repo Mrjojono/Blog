@@ -2,18 +2,23 @@
 
 require('./src/controllers/userscontrollers.php');
 require('./src/controllers/homepagecontrollers.php');
+require('./src/controllers/newscontrollers.php');
+require('./src/controllers/postsControllers.php');
+
 
 // Exemple de routage manuel
-$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'news'; // Par défaut : homepage
-$action = isset($_GET['action']) ? $_GET['action'] : 'news'; // Par défaut : homepage
+$controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'homepage'; // Par défaut : homepage
+$action = isset($_GET['action']) ? $_GET['action'] : 'homepage'; // Par défaut : homepage
 
 $controller = null;
-if ($controllerName === 'login') {
-    $controller = new userscontrollers();
+if ($controllerName === 'user') {
+    $controller = new Userscontrollers();
 } elseif ($controllerName === 'homepage') {
     $controller = new homepageControllers();
-} elseif ($controllerName === 'news') {
-    $controller = new newsControllers();
+} elseif($controllerName === 'posts'){
+    $controller = new postsControllers();
+} elseif($controllerName === 'news'){
+    $controller = new newscontrollers();
 }
 else {
     echo "controller non trouvés";
@@ -23,12 +28,12 @@ else {
 // Vérifie si la méthode (action) existe dans le contrôleur
 if (method_exists($controller, $action)) {
     // Gestion des paramètres passés à l'action
-    $id_user = isset($_GET['id_user']) ? $_GET['id_user'] : null;
+    $id = isset($_GET['id']) ? $_GET['id'] : null;
     $postData = $_POST;
 
     // Appelle dynamiquement l'action avec les paramètres
-    if (!empty($id_user)) {
-        $controller->$action($id_user);
+    if (!empty($id)) {
+        $controller->$action($id);
     } else {
         $controller->$action($postData);
     }
