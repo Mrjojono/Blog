@@ -4,7 +4,7 @@ require_once './src/config.php';
 
 class Users
 {
-   
+   private $bdd;
     public function __construct()
     {
         $this->bdd = Config();
@@ -13,7 +13,7 @@ class Users
 
     public function verifie($email)
     {
-        $sql = $this->bdd->prepare("SELECT * FROM user WHERE email = :email");
+        $sql = $this->bdd->prepare("SELECT * FROM users WHERE email = :email");
         $sql->execute(array(
             'email' => $email
         ));
@@ -25,7 +25,7 @@ class Users
     {
         $role = "user";
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = $this->bdd->prepare("INSERT INTO user(NOM,prenom,email,password,role) VALUES(:name,:prenom,:email,:password,:role)");
+        $sql = $this->bdd->prepare("INSERT INTO users(NOM,prenom,email,password,role) VALUES(:name,:prenom,:email,:password,:role)");
         $sql->execute(array(
             'name' => $name,
             'prenom' => $prenom,
@@ -35,10 +35,16 @@ class Users
         ));
     }
 
+    public function getUser($id){
+        $sql = $this->bdd->prepare("Select * from users where iduser= $id");
+        $sql->execute();
+       return $sql->fetchAll();   
+    }
+
 
     public function authentification($email, $password)
     {
-        $sql = $this->bdd->prepare("SELECT * FROM user WHERE email = :email");
+        $sql = $this->bdd->prepare("SELECT * FROM users WHERE email = :email");
         $sql->execute(array(
             'email' => $email
         ));
@@ -53,6 +59,17 @@ class Users
         }
     
         return null; // Retourne null si l'authentification échoue
+    }
+
+
+    public function comment($comment,$id_user,$id_blog)
+    {
+        $sql = $this->bdd->prepare("INSERT INTO commentaire(contenu,iduser,idblog) VALUES(:comment,:id_user,:id_blog)");
+        $sql->execute(array(
+            'comment' => $comment,
+            'id_user' => $id_user,
+            'id_blog' => $id_blog
+        ));
     }
 
 }

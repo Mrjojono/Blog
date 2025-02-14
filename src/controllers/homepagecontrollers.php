@@ -1,10 +1,19 @@
 <?php
-// homepageControllers.php
-class homepageControllers
+require_once './src/models/data.php';
+class HomepageController
 {
+    private $datas;
+
+    public function __construct()
+    {
+        session_start();
+        $this->datas = new Data(); 
+    }
+
+
     public function homepage()
     {
-        // Affiche la page d'accueil
+        $cards= $this->datas->readAll();
         require('./src/templates/homepage.php');
     }
 }

@@ -1,64 +1,72 @@
 <?php ob_start(); 
 ?>
 
-
 <main class="pt-24"> 
-    <div class="text-center mb-8 justify-center flex flex-wrap items-center m-auto w-[900px]">
+    <div class="text-center mb-8 flex flex-wrap items-center justify-center mx-auto w-[900px] animate-fadeIn">
 
-    <?php 
-    session_start();
-    if(isset($_SESSION['user'])){
-        echo '<h1 class="text-4xl font-bold mb-2">Bienvenue '.$_SESSION['user']['NOM'].'</h1>';}
-        else{
-         
-            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue sur notre blog</h1>';
+        <?php 
+        if(isset($_SESSION['user'])){
+            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue, ' . $_SESSION['user']['NOM'] . ' !</h1>';
+        } else {
+            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue sur <span class="text-red-500">TheCookingBlog</span> !</h1>';
         }
-    ?>
-        <!--un nom convenable pour le blog devra etre choisie-->
-        <p class="mt-5 font-bold text-wrap "> sur Theblog </p><br/>
-     
-       <!-- <button class="bg-red-400  hover:bg-red-700 w-36 p-2 text-white rounded-2xl cursor-pointer" > <a href="index.php?controller=user&action=login">Se connecter</a></button> -->
+        ?>
 
+        <p class="mt-5 font-semibold text-gray-700">
+             Un espace dédié aux passionnés de cuisine et aux recettes gourmandes 
+        </p>
 
         <p class="text-lg text-gray-700 leading-relaxed mt-2.5">
-      Ce blog est un espace de partage et d'inspiration où nous mettons en avant des histoires puissantes de femmes et d'individus engagés dans des combats de justice sociale et d'égalité. Ici, nous croyons que chaque voix compte et que l'écriture est un outil de transformation. Rejoignez-nous pour lire, partager et être inspirés.
-    </p>
-        <h1 class="text-4xl font-bold mb-2">Writings for our Futur </h1>
+            Découvrez des recettes savoureuses, des astuces de chefs et des idées innovantes pour régaler vos papilles. Que vous soyez amateur ou expert en cuisine, rejoignez-nous pour explorer de nouvelles saveurs et partager votre passion culinaire !
+        </p>
+
+        <h2 class="text-3xl font-bold mt-6 text-gray-900"> Saveurs & Créativité en Cuisine </h2>
+
         <p class="mt-4 text-gray-500">
-      Nous créons un environnement inclusif où chacun peut s'exprimer librement et en toute sécurité. Laissez-vous emporter par des récits qui éclairent des sujets variés : les défis sociaux, l'émancipation, les combats quotidiens et les victoires des femmes.
-    </p>
+            Chaque plat raconte une histoire. Découvrez des recettes authentiques, des expériences culinaires et des conseils pour réussir vos repas comme un chef. Rejoignez notre communauté de gourmets !
+        </p>
     </div>
 
-    <div class="relative flex justify-center items-center m-auto container">
-        <img src="./src/public/assets/hearth.jpg" alt="hearth" class="w-full max-w-7xl h-[600px] shadow-inner rounded object-cover object-center">
-        <div class="absolute inset-0 flex flex-col items-center justify-center  text-white text-center bg-black/50">
-            <h2 class="text-3xl font-bold mb-3.5">Écrire du texte ici</h2>
-            <p class="text-lg"><a href="post.php" class="inline-block px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-lg text-xl">
-      Lisez nos histoires inspirantes
-    </a></p>
+    
+    <div class="relative flex justify-center items-center mx-auto container mt-10 animate-fadeIn">
+        <img src="./src/public/assets/doritos.jpeg" alt="Délicieuses recettes" class="w-full max-w-7xl h-[600px] shadow-lg rounded-lg object-cover object-center">
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center bg-black/50 p-6">
+            <h2 class="text-3xl font-bold mb-3">Découvrez nos recettes gourmandes et saines 🍽️</h2>
+            <p class="text-lg">
+                <a href="post.php" class="inline-block px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-lg text-xl transition">
+                    Explorer les recettes
+                </a>
+            </p>
         </div>
     </div>
 
-
-    <div class="text-center mt-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Hello World!</h1>
-        <h2 class="text-2xl text-gray-600">Welcome to our blog</h2>
+    <div class="text-center mt-12 animate-fadeIn">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Bienvenue sur MA RECETTE GOURMANDE</h1>
+        <h2 class="text-2xl text-gray-600">Plongez dans un univers où saveurs et créativité se rencontrent 🍕✨</h2>
     </div>
 
-    <!--  une interactions sera faites ici pour faire voir les blog 4 derniers articles -->
-    <div class="flex flex-wrap justify-center gap-10 mb-10">
-        <?php for ($i = 0; $i < 4; $i++): ?>
-            <div class="w-[400px] h-[50vh] rounded overflow-hidden shadow-lg bg-white">
-                <img src="./src/public/assets/hearth.jpg" class="w-full h-2/3 object-cover">
+    <!-- Section des articles -->
+    <div class="flex flex-wrap justify-center gap-10 mb-10 mt-10">
+        <?php foreach ($cards as $blog): ?>
+            <div class="w-[400px] h-auto rounded-lg overflow-hidden shadow-lg bg-white transition hover:shadow-2xl animate-fadeIn">
+                <img src="<?= !empty($blog['image']) ? htmlspecialchars($blog['image']) : './src/public/assets/default.jpg'; ?>" class="w-full h-2/3 object-cover" alt="Image du blog">
+                
                 <div class="p-4">
-                    <p>Text sur le blog</p>
+                    <h2 class="text-xl font-bold"><?= htmlspecialchars($blog['TITRE']); ?></h2>
+                    <p class="text-gray-600 text-sm"><?= substr(htmlspecialchars($blog['CONTENU']), 0, 100); ?>...</p>
+                    
+                    <a href="index.php?controller=posts&action=view&id=<?= $blog['IDBLOG']; ?>" class="mt-3 inline-block text-blue-500 hover:text-blue-700">
+                        Lire la suite →
+                    </a>
                 </div>
             </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
+
 </main>
 
-<?php $content = ob_get_clean();
- ?>
-<?php require('layout.php'); 
+<?php $content = ob_get_clean(); ?>
+<?php
+$title = "Homepage";
+require('layout.php'); 
 ?>

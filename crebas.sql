@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* Nom de SGBD :  MySQL 5.0                                     */
-/* Date de création :  1/23/2025 8:57:08 PM                     */
+/* Date de crï¿½ation :  1/23/2025 8:57:08 PM                     */
 /*==============================================================*/
 
 
@@ -17,8 +17,8 @@ drop table if exists USER;
 /*==============================================================*/
 create table BLOG
 (
-   IDBLOG               int not null,
-   IDCATEGORIE          int not null,
+   IDBLOG               varchar(20) null,
+   IDCATEGORIE          varchar(20) not null,
    TITRE                char(256) not null,
    CONTENU              longtext not null,
    DATEPUBLICATION      timestamp,
@@ -32,7 +32,7 @@ create table BLOG
 /*==============================================================*/
 create table CATEGORIE
 (
-   IDCATEGORIE          int not null,
+   IDCATEGORIE          varchar(20) not null,
    NOMCATEGORIE         char(256) not null,
    DESCRIPTION          char(256),
    primary key (IDCATEGORIE)
@@ -45,7 +45,7 @@ create table COMMENTAIRE
 (
    IDCOM                int not null,
    IDUSER               int not null,
-   IDBLOG               int not null,
+   IDBLOG               varchar(20) not null,
    DATECOM              timestamp,
    STATUS               bool,
    CONTENU              longtext not null,
