@@ -3,8 +3,8 @@
 require('./src/controllers/userscontrollers.php');
 require('./src/controllers/homepagecontrollers.php');
 require('./src/controllers/newscontrollers.php');
+require('./src/controllers/detailsControllers.php');
 require('./src/controllers/postsControllers.php');
-
 
 // Exemple de routage manuel
 $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'homepage'; // Par défaut : homepage
@@ -12,12 +12,15 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'homepage'; // Par défaut 
 
 $controller = null;
 if ($controllerName === 'user') {
-    $controller = new Userscontrollers();
+    $controller = new Userscontroller();
 } elseif ($controllerName === 'homepage') {
-    $controller = new homepageControllers();
+    $controller = new  HomepageController();
+} elseif($controllerName === 'details'){
+    $controller = new DetailsController();
 } elseif($controllerName === 'posts'){
-    $controller = new postsControllers();
-} elseif($controllerName === 'news'){
+    $controller = new postsController();
+}
+elseif($controllerName === 'news'){
     $controller = new newscontrollers();
 }
 else {

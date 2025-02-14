@@ -1,6 +1,6 @@
 <?php
 
-require ('./src/models/data.php');
+require_once ('./src/models/data.php');
 
 class newsControllers
 {

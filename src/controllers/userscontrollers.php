@@ -1,6 +1,6 @@
 <?php
 require ('./src/models/users.php');
-class Userscontrollers{
+class Userscontroller{
 
     private $users; // Propriété pour réutiliser l'objet Categories
 
@@ -72,10 +72,16 @@ class Userscontrollers{
 
             if ($emailverifie) {
                 $message = "Email déjà utilisé"; 
-                header('Location: index.php?controller=user&action=register&msg='.$message);}
+                header('Location: index.php?controller=user&action=register&msg='.$message);
+            }else{
+                $this->users->register($nom, $prenom, $mail, $password);
+                header('Location: index.php?controller=user&action=login');
+            }
 
         }
     
     }
+
+   
 
 }
