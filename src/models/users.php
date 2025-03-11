@@ -4,11 +4,12 @@ require_once './src/config.php';
 
 class Users
 {
-   private $bdd;
+    private $bdd;
+
     public function __construct()
     {
         $this->bdd = Config();
-      
+
     }
 
     public function verifie($email)
@@ -33,12 +34,63 @@ class Users
             'password' => $hashedPassword,
             'role' => $role
         ));
+        return $this->bdd->lastInsertId();
     }
 
-    public function getUser($id){
+    /**
+     * @throws Exception
+     */
+    public function update($name, $prenom, $email, $password, $oldpassword, $odl_email, $id)
+    {
+        // Validez les données obligatoires
+        if (empty($name) || empty($prenom) || empty($email)) {
+            throw new Exception("Tous les champs obligatoires doivent être remplis.");
+        }
+
+        // Hash du nouveau mot de passe s'il est fourni
+        $hashedPassword = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : null;
+
+        try {
+            if ($hashedPassword) {
+                // Vérifiez l'ancien mot de passe
+                if ($this->authentification($odl_email, $oldpassword)) {
+                    $sql = $this->bdd->prepare("UPDATE users SET NOM = :name, prenom = :prenom, email = :email, password = :password WHERE IDUSER = :id");
+                    $sql->execute(array(
+                        ':name' => $name,
+                        ':prenom' => $prenom,
+                        ':email' => $email,
+                        ':password' => $hashedPassword,
+                        ':id' => $id
+                    ));
+                } else {
+                    throw new Exception("Ancien mot de passe incorrect.");
+                }
+            } else {
+
+                $sql = $this->bdd->prepare("UPDATE users SET NOM = :name, prenom = :prenom, email = :email WHERE IDUSER = :id");
+                $sql->execute(array(
+                    ':name' => $name,
+                    ':prenom' => $prenom,
+                    ':email' => $email,
+                    ':id' => $id
+                ));
+            }
+
+            if ($sql->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            throw new Exception("Erreur lors de la mise à jour : " . $e->getMessage());
+        }
+    }
+
+    public function getUser($id)
+    {
         $sql = $this->bdd->prepare("Select * from users where iduser= $id");
         $sql->execute();
-       return $sql->fetchAll();   
+        return $sql->fetchAll();
     }
 
 
@@ -49,20 +101,19 @@ class Users
             'email' => $email
         ));
         $result = $sql->fetchAll();
-    
+
         if (count($result) > 0) {
             $user = $result[0];
-            // Vérifiez le mot de passe (supposons que le mot de passe est haché avec password_hash)
-            if (password_verify( $password, $user['PASSWORD'])) {
+
+            if (password_verify($password, $user['PASSWORD'])) {
                 return $user;
             }
         }
-    
-        return null; // Retourne null si l'authentification échoue
+        return null;
     }
 
 
-    public function comment($comment,$id_user,$id_blog)
+    public function comment($comment, $id_user, $id_blog)
     {
         $sql = $this->bdd->prepare("INSERT INTO commentaire(contenu,iduser,idblog) VALUES(:comment,:id_user,:id_blog)");
         $sql->execute(array(

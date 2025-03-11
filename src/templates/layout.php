@@ -39,7 +39,7 @@
                 <li><a href="index.php?controller=homepage&action=homepage" class="hover:text-amber-300 transition">Accueil</a></li>
                 <li><a href="index.php?controller=posts&action=Posts" class="hover:text-amber-300 transition">Post</a></li>
                 <li><a href="index.php?controller=news&action=getArticles" class="hover:text-amber-300 transition">Actualités</a></li>
-                <li><a href="#" class="hover:text-amber-300 transition">À propos</a></li>
+                <li><a href="index.php?controller=homepage&action=profil" class="hover:text-amber-300 transition">Profil</a></li>
                 <li>
                     <?php if(isset($_SESSION['user'])): ?>
                         <a href="index.php?controller=user&action=logout" class="bg-red-500 hover:bg-red-700 px-5 py-2 rounded-2xl text-white transition">
@@ -61,7 +61,7 @@
     </div>
 
    
-    <footer class="bg-black text-white p-4 text-center mt-6">
+    <footer class="bg-black text-white p-4 text-center w-[100%] mt-6">
         <p>&copy; <?= date('Y'); ?> Mon Blog - Tous droits réservés.</p>
     </footer>
 </body>

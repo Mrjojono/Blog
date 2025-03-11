@@ -6,6 +6,7 @@ require('./src/controllers/newscontrollers.php');
 require('./src/controllers/detailsControllers.php');
 require('./src/controllers/postsControllers.php');
 
+
 // Exemple de routage manuel
 $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'homepage'; // Par défaut : homepage
 $action = isset($_GET['action']) ? $_GET['action'] : 'homepage'; // Par défaut : homepage
