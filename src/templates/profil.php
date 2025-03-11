@@ -1,61 +1,119 @@
 <?php ob_start(); ?>
 
-<main class="pt-24">
-    <div class="text-center mb-8 justify-center flex flex-wrap items-center m-auto w-[900px]">
-
-        <div class="mt-24 container mx-auto shadow-lg border-2 flex flex-col justify-center p-10 border-black bg-white">
-            <?php if (!empty($post)) :  ?>
-                <img src="<?= !empty($post['image']) ? htmlspecialchars($post['image']) : './src/public/assets/default.jpg'; ?>" 
-                    alt="Image du post" class="w-full h-fit p-3 object-cover rounded">
-                
-                <h1 class="text-4xl font-bold bg-amber-50 text-gray-800 mb-4 p-4 rounded-lg">
-                    <?= htmlspecialchars($post['TITRE']); ?>
-                </h1>
-                
-                <div class="bg-white shadow-2xl shadow-black p-6 mb-2 mt-5 rounded flex flex-row gap-5 w-full">
-                    <p class="text-justify"><?= nl2br(htmlspecialchars($post['CONTENU'])); ?></p>
+    <main class="pt-24">
+        <div class="text-center mb-8 justify-center flex flex-wrap items-center m-auto w-[900px] h-full animate-fadeIn ">
+            <div class="container bg-white border-2 border-black backdrop-blur-2xl">
+                <div class="justify-center flex flex-wrap items-center m-auto h-auto rounded-4xl">
+                    <img src="./src/public/assets/profil.jpg" class="rounded-full h-80 w-80 p-5" alt="profil-image"/>
                 </div>
-            <?php else : ?>
-                <p class="text-red-500">Le post demandé n'existe pas.</p>
-            <?php endif; ?>
-        </div>
 
-        <!-- Formulaire d'ajout de commentaire -->
-        <form method="post" action="index.php?controller=details&action=comment" 
-            class="mt-5 container mx-auto shadow-lg border-2 mb-20 flex flex-col justify-center p-10 border-black bg-gray-300">
-            
-            <h1 class="text-4xl font-bold bg-amber-50 text-gray-800 mb-4 p-4 rounded-lg">Commentaires</h1>
-            
-            <textarea name="comment" class="w-full h-24 p-2 border-2 border-black rounded-lg" 
-                placeholder="Ajouter votre commentaire" required></textarea>
-            
-            <button type="submit" class="bg-amber-950 w-36 p-2 text-white rounded-2xl mt-2 
-                hover:bg-amber-800 transition">Envoyer</button>
-
-            <input type="hidden" name="id_blog" value="<?= htmlspecialchars($post['IDBLOG']); ?>">
-        </form>
-
-        
-        <div class="bg-white w-full mt-4 border-2 border-amber-50 text-justify p-4 rounded-lg shadow-md">
-            <h2 class="text-xl font-bold mb-4">Commentaires :</h2>
-
-            <?php if (!empty($commentaires)) : ?>
-                <?php foreach ($commentaires as $com) : ?>
-                    <div class="bg-gray-100 p-4 mb-2 rounded">
-                        <div class="flex items-center mb-2">
-                            <span class="font-bold text-lg mr-2"><?= htmlspecialchars($com['NOM']); ?></span>
-                            <span class="text-gray-500 text-sm"><?= $com['DATECOM']; ?></span>
-                        </div>
-                        <p class="text-gray-800"><?= htmlspecialchars($com['CONTENU']); ?></p>
+                <hr/>
+                <div class="mb-8 justify-center flex flex-wrap flex-col gap-5 m-auto w-full p-5 mt-5">
+                    <div class="flex flex-row justify-center gap-10 items-center">
+                        <h1><?php echo $_SESSION['user']['NOM'] . " " . $_SESSION['user']['PRENOM']; ?></h1>
+                        <span> <?php echo $_SESSION['user']['EMAIL']; ?>  </span>
+                        <form action="#" method="post">
+                            <button type="submit" id="toggleButton"
+                                    value="<?= isset($_POST['action']) ? $_POST['action'] : '0'; ?>" name="action"
+                                    class="p-2 border w-28 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                                <?= isset($_POST['action']) && $_POST['action'] == '1' ? 'Cancel' : 'Edit'; ?>
+                            </button>
+                        </form>
                     </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <p>Aucun commentaire pour le moment.</p>
-            <?php endif; ?>
-        </div>
 
-    </div>
-</main>
+                    <?php if (isset($_POST['action']) && $_POST['action'] == '1') : ?>
+<!--                        --><?php
+//                        if (isset($_POST['msg'])) {
+//                            $message = $_POST['msg'];
+//                            if (!empty($message)) {
+//                                echo "<div class='text-center p-3 mb-4 text-red-700 bg-red-300 rounded-lg border border-red-500'>
+//                             " . htmlspecialchars($message) . "
+//                            </div>";
+//                            }
+//                        }
+//                        ?>
+                        <form action="index.php?controller=user&action=update" method="post"
+                              class="flex flex-col flex-wrap gap-2 justify-around shadow-2xl shadow-black backdrop-opacity-10 border-black p-5 animate-fadeIn">
+                            <!-- Champs du formulaire -->
+
+                            <input type="hidden" value="<?php echo $_SESSION['user']['IDUSER']; ?>" name="id"/>
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="nom" class="text-gray-700 font-semibold mb-1">
+                                    Nom:
+                                </label>
+                                <input type="text" id="nom" name="name" value="<?php echo $_SESSION['user']['NOM']; ?>"
+                                       class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="prenom" class="text-gray-700 font-semibold mb-1">
+                                    Prenom:
+                                </label>
+                                <input type="text" id="prenom" name="prenom"
+                                       value="<?php echo $_SESSION['user']['PRENOM']; ?>"
+                                       class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="email" class="text-gray-700 font-semibold mb-1">
+                                    Email:
+                                </label>
+                                <input type="email" id="email" name="email"
+                                       value="<?php echo $_SESSION['user']['EMAIL']; ?>"
+                                       class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                                <input name="old_mail" type="hidden"
+                                       value="<?php echo $_SESSION['user']['EMAIL']; ?> "/>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <input type="button" value="change password if want"
+                                       class="p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="pass" class="text-gray-700 font-semibold mb-1">
+                                    Old password: <input type="password" id="pass" name="old_password"
+                                                         class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="pass" class="text-gray-700 font-semibold mb-1">
+                                    New password: <input type="password" id="pass" name="password"
+                                                         class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <label for="pass" class="text-gray-700 font-semibold mb-1">
+                                    Confirm password: <input type="password" id="pass" name="repeatpassword"
+                                                             class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
+                                </label>
+                            </div>
+
+                            <div class="flex items-center mt-5 ml-20 flex-row gap-5">
+                                <button type="submit"
+                                        class="p-2 border w-28 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const button = document.getElementById('toggleButton');
+
+        button.addEventListener('click', () => {
+            // Change la valeur du bouton entre '0' et '1'
+            button.value = button.value === '0' ? '1' : '0';
+            // Change le texte du bouton en fonction de la valeur
+            button.textContent = button.value === '1' ? 'Cancel' : 'Edit';
+        });
+    </script>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('layout.php'); ?>

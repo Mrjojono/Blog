@@ -55,7 +55,9 @@ class postsController
 
     public function view($id)
     {
-        $commentaire =   $this->data->readComment($id);
+        $commentaires =   $this->data->readComment($id);
+//        var_dump($commentaires);
+//        exit();
         $post = $this->data->getLocalArticleById($id);
         require('./src/templates/details2.php');
     }

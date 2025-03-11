@@ -16,4 +16,9 @@ class HomepageController
         $cards= $this->datas->readAll();
         require('./src/templates/homepage.php');
     }
+
+    public function profil()
+    {
+            require ('./src/templates/profil.php');
+    }
 }
