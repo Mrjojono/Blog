@@ -40,17 +40,18 @@
         <div class="bg-white w-full mt-4 border-2 border-amber-50 text-justify p-4 rounded-lg shadow-md">
 
 
-            <?php if (!empty($commentaires)) : ?>
+            <?php $users = new Users();
+            if (!empty($commentaires)) : ?>
                 <?php foreach ($commentaires as $com) : ?>
+                    <?php $anse = $users->getUser(htmlspecialchars($com['IDUSER'])); ?>
                     <div class="flex flex-row gap-1 items-center ">
                         <img src="./src/public/assets/profil.jpg" alt="image_profile"
                              class="rounded-full h-20 w-20 p-5"/>
-                        <h2 class="text-xl font-bold mb-4">Username</h2>
+                        <h2 class="text-xl font-bold mb-4"><?= $anse[0]['NOM']; ?></h2>
                     </div>
 
                     <div class="bg-gray-100 p-4 mb-2 rounded">
                         <div class="flex items-center mb-2">
-                            <span class="font-bold text-lg mr-2"><?= htmlspecialchars($com['IDUSER']); ?></span>
                             <span class="text-gray-500 text-sm"><?= $com['DATECOM']; ?></span>
                         </div>
                         <p class="text-gray-800"><?= htmlspecialchars($com['CONTENU']); ?></p>
@@ -59,9 +60,7 @@
             <?php else : ?>
                 <p>Aucun commentaire pour le moment.</p>
             <?php endif; ?>
-
         </div>
-
 
     </div>
 </main>

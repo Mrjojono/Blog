@@ -2,7 +2,7 @@
 
     <main class="pt-24">
         <div class="text-center mb-8 justify-center flex flex-wrap items-center m-auto w-[900px] h-full animate-fadeIn ">
-            <div class="container bg-white border-2 border-black backdrop-blur-2xl">
+            <div class="container bg-white border-2 border-blac backdrop-blur-2xl">
                 <div class="justify-center flex flex-wrap items-center m-auto h-auto rounded-4xl">
                     <img src="./src/public/assets/profil.jpg" class="rounded-full h-80 w-80 p-5" alt="profil-image"/>
                 </div>
