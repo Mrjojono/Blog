@@ -5,11 +5,15 @@
     <div class="text-center mb-8 flex flex-wrap items-center justify-center mx-auto w-[900px] animate-fadeIn">
 
         <?php
-        if (isset($_SESSION['user'])) {
-            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue, ' . $_SESSION['user']['NOM'] . ' !</h1>';
-        } else {
-            echo '<h1 class="text-4xl font-bold mb-2">Bienvenue sur <span class="text-red-500">TheCookingBlog</span> !</h1>';
-        }
+        if (isset($_SESSION['user'])) { ?>
+            <h1 class="text-4xl font-bold mb-2" style="font-family: 'Playwrite HU', sans-serif;">Bienvenue
+                <?php echo htmlspecialchars($_SESSION['user']['NOM']); ?> sur
+                <span class="text-red-500">Gourmet blog</span> !</h1>'
+
+        <?php } else { ?>
+            <h1 class="text-4xl font-bold mb-2" style="font-family: 'Playwrite HU', sans-serif;">Bienvenue sur
+                <span class="text-red-500">Gourmet blog</span> !</h1>'
+        <?php }
         ?>
 
         <p class="mt-5 font-semibold text-gray-700">
@@ -22,7 +26,8 @@
             votre passion culinaire !
         </p>
 
-        <h2 class="text-3xl font-bold mt-6 text-gray-900"> Saveurs & Créativité en Cuisine </h2>
+        <h2 class="text-3xl font-bold mt-6 text-gray-900" style="font-family: 'Playwrite HU', sans-serif;"> Saveurs &
+            Créativité en Cuisine </h2>
 
         <p class="mt-4 text-gray-500">
             Chaque plat raconte une histoire. Découvrez des recettes authentiques, des expériences culinaires et des
@@ -35,9 +40,10 @@
         <img src="./src/public/assets/doritos.jpeg" alt="Délicieuses recettes"
              class="w-full max-w-7xl h-[600px] shadow-lg rounded-lg object-cover object-center">
         <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center bg-black/50 p-6">
-            <h2 class="text-3xl font-bold mb-3">Découvrez nos recettes gourmandes et saines 🍽️</h2>
+            <h2 class="text-3xl font-bold mb-3" style="font-family: 'Playwrite HU', sans-serif;">Découvrez nos recettes
+                gourmandes et saines 🍽️</h2>
             <p class="text-lg">
-                <a href="post.php"
+                <a href="index.php?controller=news&action=getVideo"
                    class="inline-block px-6 py-3 text-white bg-pink-600 hover:bg-pink-700 rounded-lg text-xl transition">
                     Explorer les recettes
                 </a>
@@ -46,7 +52,7 @@
     </div>
 
     <div class="text-center mt-12 animate-fadeIn">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">Bienvenue sur MA RECETTE GOURMANDE</h1>
+        <h1 class="text-4xl font-bold text-gray-800 mb-4"> Mes RECETTE GOURMANDE</h1>
         <h2 class="text-2xl text-gray-600">Plongez dans un univers où saveurs et créativité se rencontrent 🍕✨</h2>
     </div>
 
@@ -68,19 +74,24 @@
                             Lire la suite →
                         </a>
                         <?php if (isset($_SESSION['user']) && $_SESSION['user']['IDUSER'] == $blog['IDUSER']): ?>
-                        <form>
+
                             <div class="flex flex-row gap-4 mt-4 items-center">
-                                <button type="submit"
-                                        class="bg-blue-100 w-full p-2 rounded cursor-pointer hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-800 transition">
-                                    Éditer
-                                </button>
-                                <button type="submit"
-                                        class="bg-red-500/[50%] w-full cursor-pointer p-2 rounded hover:bg-red-700/[50%] hover:shadow-2xl hover:shadow-black transition">
-                                    Supprimer
-                                </button>
+                                <form method="post" action="index.php?controller=posts&action=Edit">
+                                    <button type="submit"
+                                            class="bg-blue-100 w-full p-2 rounded cursor-pointer hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-800 transition">
+                                        Editer
+                                    </button>
+                                </form>
+                                <form method="post" action="index.php?controller=posts&action=Delete">
+                                    <button type="submit"
+                                            class="bg-red-500/[50%] w-full cursor-pointer p-2 rounded hover:bg-red-700/[50%] hover:shadow-2xl hover:shadow-black transition">
+                                        Supprimer
+                                    </button>
+                                </form>
+
                             </div>
-                            <?php endif; ?>
-                        </form>
+                        <?php endif; ?>
+
 
                     </div>
                 </div>

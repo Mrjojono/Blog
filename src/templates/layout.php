@@ -9,6 +9,8 @@
             referrerpolicy="origin"></script>
     <link rel="stylesheet" href="./src/public/output.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap');
+
         .animate-fadeIn {
             animation: fadeIn 1.5s ease-in-out;
         }
@@ -64,10 +66,9 @@
 <!-- Barre de navigation -->
 <header class="bg-black p-4 shadow-md fixed w-full top-0 z-20">
     <div class="container mx-auto flex items-center justify-between">
-        <h1 class="text-black bg-amber-300 px-4 py-2 rounded-lg text-xl font-bold">
-            Mon Blog
+        <h1 class="text-black bg-amber-300 flex flex-row  px-4 py-2 rounded-lg text-xl font-bold" style="font-family: 'Playwrite HU', sans-serif;">
+           <img src="./src/public/assets/chef-hat.png" class="mr-2" alt="chefhat"> <span>  Gourmet</span>
         </h1>
-
         <ul class="text-white flex flex-row gap-6 text-lg">
             <li><a href="index.php?controller=homepage&action=homepage"
                    class="hover:text-amber-300 transition">Accueil</a></li>

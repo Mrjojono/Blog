@@ -12,6 +12,18 @@
                     <?= htmlspecialchars($post['TITRE']); ?>
                 </h1>
 
+                <?php if (!empty($post['video'])) { ?>
+                    <div class="relative w-full" style="padding-top: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg"
+                                src="<?= htmlspecialchars($post['video']) ?>"
+                                title="Vidéo intégrée"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                <?php } ?>
+
+
                 <div class="bg-white shadow-2xl shadow-black p-6 mb-2 mt-5 rounded flex flex-row gap-5 w-full">
                     <p class="text-justify"><?= nl2br(htmlspecialchars($post['CONTENU'])); ?></p>
                 </div>
@@ -32,7 +44,10 @@
             <button type="submit" class="bg-amber-950 w-36 p-2 text-white rounded-2xl mt-2 
                 hover:bg-amber-800 transition">Envoyer
             </button>
-            <input type="hidden" name="iduser" value="<?= htmlspecialchars($_SESSION['user']['IDUSER']) ?>"/>
+            <?php
+            if (isset($_SESSION['user'])) { ?>
+                <input type="hidden" name="iduser" value="<?= htmlspecialchars($_SESSION['user']['IDUSER']) ?>"/>
+            <?php } ?>
             <input type="hidden" name="id_blog" value="<?= htmlspecialchars($post['IDBLOG']); ?>">
         </form>
 
