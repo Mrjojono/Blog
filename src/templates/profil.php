@@ -71,15 +71,15 @@
                             </div>
 
                             <div class="flex items-center mt-5 ml-20 flex-row gap-5">
-                                <label for="pass" class="text-gray-700 font-semibold mb-1">
-                                    Old password: <input type="password" id="pass" name="old_password"
+                                <label for="pass1" class="text-gray-700 font-semibold mb-1">
+                                    Old password: <input type="password" id="pass1" name="old_password"
                                                          class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
                                 </label>
                             </div>
 
                             <div class="flex items-center mt-5 ml-20 flex-row gap-5">
-                                <label for="pass" class="text-gray-700 font-semibold mb-1">
-                                    New password: <input type="password" id="pass" name="password"
+                                <label for="pass2" class="text-gray-700 font-semibold mb-1">
+                                    New password: <input type="password" id="pass2" name="password"
                                                          class="w-[50%] p-2 border rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"/>
                                 </label>
                             </div>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./src/public/output.css">
 </head>
 
-<body class="bg-cover bg-center flex justify-center items-center min-h-screen" style="background-image: url('./src/public/assets/mimiam.jpeg');">
+<body class="bg-cover bg-center flex justify-center items-center min-h-screen" style="background-image: url('./src/public/assets/mimiam.jpeg');  backdrop-filter: blur(6px);">
     
     <div class="bg-white/80 backdrop-blur-lg p-8 rounded-lg shadow-lg w-full max-w-md animate-fadeIn">
       

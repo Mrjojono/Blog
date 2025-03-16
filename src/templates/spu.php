@@ -50,7 +50,7 @@
 
             <button type="submit"
                     class="bg-amber-600 w-40 p-3 text-white font-semibold rounded-lg shadow-md hover:bg-amber-700 transition-all">
-                Publier ✨
+                Modifier✨
             </button>
         </form>
     </div>

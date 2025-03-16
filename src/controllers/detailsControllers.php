@@ -21,9 +21,16 @@ class DetailsController
 
     public function readpost($id)
     {
+
         $commentaire = $this->data->readComment($id);
-        $commentaires = $this->data->getArticleById($id);
+        $post = $this->data->getArticleById($id);
         require('./src/templates/details.php');
+    }
+
+    public function readvid($id)
+    {
+        $vid = "https://www.youtube.com/embed/" . urlencode($id);
+        require('./src/templates/viddetail.php');
     }
 
     public function comment($data)

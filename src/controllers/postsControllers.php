@@ -16,6 +16,7 @@ class postsController
 
     public function Posts()
     {
+
         require('./src/templates/posts.php');
     }
 
@@ -49,15 +50,14 @@ class postsController
             exit();
         }
     
-        $this->data->addBlog($id_user,$data['headline'], $data['bodyText'], $uploadFile);
+        $this->data->addBlog($id_user,$data['headline'], $data['bodyText'], $uploadFile,$data['video_url']);
         header('Location: index.php?controller=homepage&action=homepage');
     }
 
     public function view($id)
     {
         $commentaires =   $this->data->readComment($id);
-//        var_dump($commentaires);
-//        exit();
+
         $post = $this->data->getLocalArticleById($id);
         require('./src/templates/details2.php');
     }
