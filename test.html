@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modale Tailwind</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+  <!-- Bouton pour ouvrir la modale -->
+ 
+
+  <!-- Modale (initialement cachée) -->
+  <div id="modal" class="fixed inset-0 z-10 hidden">
+    <div class="fixed inset-0 bg-gray-500/75 transition-opacity" aria-hidden="true"></div>
+    
+    <div class="fixed inset-0 z-10 flex items-center justify-center">
+      <div class="bg-white rounded-lg shadow-xl sm:w-full sm:max-w-lg">
+        <div class="p-6">
+          <div class="flex items-center">
+            <div class="size-12 bg-red-100 flex items-center justify-center rounded-full">
+              <svg class="size-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+              </svg>
+            </div>
+            <div class="ml-4">
+              <h3 class="text-lg font-semibold text-gray-900">Désactiver le compte</h3>
+              <p class="text-sm text-gray-500 mt-2">Êtes-vous sûr de vouloir désactiver votre compte ? Cette action est irréversible.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-6 py-3 flex justify-end">
+          <button id="closeModal" class="px-4 py-2 text-gray-900 bg-white rounded-md hover:bg-gray-200">Annuler</button>
+          <button class="ml-3 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500">Désactiver</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sélection des éléments
+    const modal = document.getElementById('modal');
+    const openModal = document.getElementById('openModal');
+    const closeModal = document.getElementById('closeModal');
+
+    // Afficher la modale
+    openModal.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+    });
+
+    // Cacher la modale
+    closeModal.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+
+    // Fermer en cliquant en dehors du contenu
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  </script>
+
+</body>
+</html>

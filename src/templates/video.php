@@ -8,7 +8,13 @@
              class="w-full h-[600px] shadow-lg rounded-lg object-cover object-center">
         <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center bg-black/50 p-6">
             <h2 class="text-3xl font-bold mb-3" style="font-family: 'Playwrite HU', sans-serif;">Découvrez videos
-                culinaires d'exception </h2>
+                
+            <div class="text-center mt-12 animate-fadeIn">
+        <h1 class="text-4xl font-bold mb-4"> </h1>
+        <h2 class="text-2xl ">Explorez des recettes et astuces inédites 🎥🍳</h2>
+    </div>
+
+        </h2>
         </div>
     </div>
 
