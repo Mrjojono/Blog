@@ -13,6 +13,7 @@ class HomepageController
 
     public function homepage()
     {
+        $show = "hidden";
         $cards= $this->datas->readAll();
         require('./src/templates/homepage.php');
     }

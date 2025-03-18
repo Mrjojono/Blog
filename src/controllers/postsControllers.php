@@ -62,4 +62,23 @@ class postsController
         require('./src/templates/details2.php');
     }
     
+  // Dans votre contrôleur posts
+  public function delete() {
+    $postId = $_POST['id'] ?? null;
+  
+    if ($postId) {
+      // Supprimez le post de la base de données
+      $success = $this->data->deleteBlog($postId);
+      
+      // Renvoyer une réponse JSON valide
+      header('Content-Type: application/json');
+      echo json_encode(['success' => $success]);
+      exit();
+    } else {
+      // Renvoyer une réponse JSON en cas d'erreur
+      header('Content-Type: application/json');
+      echo json_encode(['success' => false, 'message' => 'ID manquant']);
+      exit();
+    }
+  }
 }

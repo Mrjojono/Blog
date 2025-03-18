@@ -123,26 +123,24 @@ class Data
                 throw $e;
             }
         }
-
-
     }
 
 
-//    public function addCategorie($id_categorie, $nomcategorie)
-//    {
-//        $stmt = $this->bdd->prepare("SELECT idcategorie FROM categorie WHERE idcategorie = ?");
-//        $stmt->execute([$id_categorie]);
-//
-//        if (!$stmt->fetch()) {
-//            $stmt = $this->bdd->prepare("INSERT INTO categorie(idcategorie,nomcategorie) VALUES (:idcat, :nomcat)");
-//            $stmt->execute(
-//                array(
-//                    ':idcat' => $id_categorie,
-//                    ':nomcat' => $nomcategorie,
-//                )
-//            );
-//        }
-//    }
+    //    public function addCategorie($id_categorie, $nomcategorie)
+    //    {
+    //        $stmt = $this->bdd->prepare("SELECT idcategorie FROM categorie WHERE idcategorie = ?");
+    //        $stmt->execute([$id_categorie]);
+    //
+    //        if (!$stmt->fetch()) {
+    //            $stmt = $this->bdd->prepare("INSERT INTO categorie(idcategorie,nomcategorie) VALUES (:idcat, :nomcat)");
+    //            $stmt->execute(
+    //                array(
+    //                    ':idcat' => $id_categorie,
+    //                    ':nomcat' => $nomcategorie,
+    //                )
+    //            );
+    //        }
+    //    }
 
     public function trimId($id)
     {
@@ -170,7 +168,6 @@ class Data
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
-
     }
 
 
@@ -185,15 +182,24 @@ class Data
     {
         $apiKey = "AIzaSyDEGp9NjTOokyxLbbSSWBIk44lhLgcWnF8";
         $searchQuery = "cuisine africaine";
-        $maxResults = 10;
+        $maxResults = 20;
 
         $url = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" . urlencode($searchQuery) . "&type=video&maxResults=" . $maxResults . "&key=" . $apiKey;
 
         $response = file_get_contents($url);
 
-         return json_decode($response, true);;
-
+        return json_decode($response, true);;
     }
 
-
+    public function deleteBlog($id): bool
+    {
+        $stmt = $this->bdd->prepare("DELETE FROM blog WHERE IDBLOG = :id");
+        try {
+            $stmt->execute(['id' => $id]);
+            return true;
+        } catch (PDOException $e) {
+            error_log("Erreur lors de la suppression du blog : " . $e->getMessage());
+            return false;
+        }
+    }
 }
